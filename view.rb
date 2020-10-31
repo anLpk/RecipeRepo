@@ -1,27 +1,22 @@
-require_relative 'recipe'
-
 class View
-  def recipe_name
-    puts "Recipe name:"
-    print "> "
-    return gets.chomp
-  end
-
-  def recipe_description
-    puts "Recipe description:"
-    print "> "
-    return gets.chomp
-  end
-
-  def display(recipe_list)
-    recipe_list.each_with_index do |recipe, index|
-      puts "#{index + 1} - Name: #{recipe.name} Description: #{recipe.description}"
+  def display(recipes)
+    recipes.each_with_index do |recipe, index|
+      checkbox = recipe.done? ? "[x]" : "[ ]"
+      puts "#{index + 1} - #{checkbox} - #{recipe.name} - RATING: #{recipe.rating}"
     end
   end
 
-  def ask_for_index_to_destroy
-    puts "Which index to delete?"
+  # Rather than using two separate methods that does essentially the same thing,
+  # We can use a generic one as defined on line 16
+  # def ask_for_name
+  # end
+
+  # def ask_for_description
+  # end
+
+  def ask_for(label)
+    puts "What's the recipe's #{label}"
     print "> "
-    return gets.chomp.to_i - 1
+    return gets.chomp
   end
 end
